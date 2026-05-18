@@ -2,7 +2,7 @@ include .env
 export
 
 env-up:
-	docker compose up todolist-postgres
+	docker compose up -d todolist-postgres
 
 env-down:
-	docker compose down todolist-postgres
+	docker compose down -v todolist-postgres
