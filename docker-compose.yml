@@ -11,3 +11,9 @@ services:
     ports:
       - "5432:5432"
     restart: always
+  
+  todolist-postgres-migrate:
+    image: migrate/migrate:v4.19.1
+    container_name: todolist-postgres-migrate
+    volumes:
+      - ${PROJECT_ROOT}/migrations:/migrations

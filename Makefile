@@ -1,3 +1,5 @@
+SHELL := bash
+
 include .env
 export
 
@@ -6,3 +8,6 @@ env-up:
 
 env-down:
 	docker compose down -v todolist-postgres
+
+migrate-create:
+	scripts\migrate-create.bat $(seq)
