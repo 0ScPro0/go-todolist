@@ -1,0 +1,13 @@
+services:
+  todolist-postgres:
+    image: postgres:18.4-alpine
+    container_name: todolist-postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ${PROJECT_ROOT}/out/pgdata:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    restart: always
