@@ -11,3 +11,6 @@ env-down:
 
 migrate-create:
 	scripts\migrate-create.bat $(seq)
+
+run:
+	@go run cmd/server/main.go
