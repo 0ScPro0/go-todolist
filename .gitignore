@@ -1,3 +1,5 @@
 .vscode
 .env
 out
+.gocache
+logs
