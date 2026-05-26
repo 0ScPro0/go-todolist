@@ -1,0 +1,3 @@
+﻿*** Begin Patch
+*** Delete File: internal/core/transport/http/server/server.go
+*** End Patch

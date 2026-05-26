@@ -3,13 +3,13 @@ services:
     image: postgres:18.4-alpine
     container_name: todolist-postgres
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DATABASE_POSTGRES_DB}
+      - POSTGRES_USER=${DATABASE_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DATABASE_POSTGRES_PASSWORD}
     volumes:
       - ${PROJECT_ROOT}/out/pgdata:/var/lib/postgresql
     ports:
-      - "5432:5432"
+      - "${DATABASE_POSTGRES_PORT}:5432"
     restart: always
   
   todolist-postgres-migrate:
@@ -17,3 +17,13 @@ services:
     container_name: todolist-postgres-migrate
     volumes:
       - ${PROJECT_ROOT}/migrations:/migrations
+    command:
+      [
+        "-path",
+        "/migrations",
+        "-database",
+        "postgres://${DATABASE_POSTGRES_USER}:${DATABASE_POSTGRES_PASSWORD}@todolist-postgres:${DATABASE_POSTGRES_PORT}/${DATABASE_POSTGRES_DB}?sslmode=disable",
+        "up"
+      ]
+    depends_on:
+      - todolist-postgres
