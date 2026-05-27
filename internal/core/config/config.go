@@ -34,7 +34,7 @@ type Config struct {
 func NewConfig() (*Config, error) {
 	var config Config
 
-	processors := map[string]interface{}{
+	processors := map[string]any{
 		"SERVER":      &config.Server,
 		"DATABASE":    &config.Database,
 		"LOGGER":      &config.Logger,
