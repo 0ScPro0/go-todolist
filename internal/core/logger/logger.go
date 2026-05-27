@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -18,6 +19,15 @@ type Logger struct {
 	*zap.Logger // Embedded zap logger for all logging methods (Info, Debug, Error, etc.)
 
 	file *os.File // File handle to the log file, needed for proper cleanup
+}
+
+func FromContext(ctx context.Context) *Logger {
+	log, ok := ctx.Value("log").(*Logger)
+	if !ok {
+		panic("No logger in context")
+	}
+	
+	return log
 }
 
 // NewLogger creates and initializes a new logger instance based on the application configuration
@@ -85,6 +95,13 @@ func NewLogger(cfg *config.Config) (*Logger, error) {
 		Logger: zapLogger,
 		file:   logFile,
 	}, nil
+}
+
+func (l *Logger) With (field ...zap.Field) *Logger {
+	return &Logger{
+		Logger: l.Logger.With(field...),
+		file: l.file,
+	}
 }
 
 // Close properly shuts down the logger by closing the log file
