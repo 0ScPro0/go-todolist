@@ -17,6 +17,7 @@ import (
 // This provides structured logging capabilities with both console and file outputs
 type Logger struct {
 	*zap.Logger // Embedded zap logger for all logging methods (Info, Debug, Error, etc.)
+	config *config.LoggerConfig
 
 	file *os.File // File handle to the log file, needed for proper cleanup
 }
@@ -93,6 +94,7 @@ func NewLogger(cfg *config.Config) (*Logger, error) {
 	// Wrap the zap logger with our file handle for proper cleanup
 	return &Logger{
 		Logger: zapLogger,
+		config: &cfg.Logger,
 		file:   logFile,
 	}, nil
 }
@@ -100,6 +102,7 @@ func NewLogger(cfg *config.Config) (*Logger, error) {
 func (l *Logger) With (field ...zap.Field) *Logger {
 	return &Logger{
 		Logger: l.Logger.With(field...),
+		config: l.config,
 		file: l.file,
 	}
 }
