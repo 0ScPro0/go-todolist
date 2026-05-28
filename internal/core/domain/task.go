@@ -1,5 +1,7 @@
 package domain
 
+import "time"
+
 // TaskStatus type
 type TaskStatus int
 
@@ -23,4 +25,5 @@ type Task struct {
 	Name        string     `json:"name"`
 	Description *string    `json:"description"`
 	Status      TaskStatus `json:"status"`
+	CreatedAt 	time.Time  `json:"created_at"`
 }

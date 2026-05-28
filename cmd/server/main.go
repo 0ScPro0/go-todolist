@@ -35,7 +35,7 @@ func main() {
 	tasksTransportHTTP := tasks_transport_http.NewTaskHTTPHandler(nil)
 	tasksRoutes := tasksTransportHTTP.Routes()
 
-	apiVersionRouter := core_http_server.NewAPIVerssionRouter(core_http_server.ApiVersion1)
+	apiVersionRouter := core_http_server.NewAPIVersionRouter(core_http_server.ApiVersion1)
 	apiVersionRouter.RegisterRoutes(tasksRoutes...)
 
 	httpServer := core_http_server.NewHTTPServer(
