@@ -1,6 +1,7 @@
 @echo off
 if "%1"=="" (
-    echo required seq parameter is missing
+    echo required parameter seq is missing
+    echo Usage: migrate-create.bat ^<migration_name^>
     exit /b 1
 )
 
