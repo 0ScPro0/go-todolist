@@ -17,13 +17,5 @@ services:
     container_name: todolist-postgres-migrate
     volumes:
       - ${PROJECT_ROOT}/migrations:/migrations
-    command:
-      [
-        "-path",
-        "/migrations",
-        "-database",
-        "postgres://${DATABASE_POSTGRES_USER}:${DATABASE_POSTGRES_PASSWORD}@todolist-postgres:${DATABASE_POSTGRES_PORT}/${DATABASE_POSTGRES_DB}?sslmode=disable",
-        "up"
-      ]
     depends_on:
       - todolist-postgres

@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS gotodolist.tasks CASCADE;
+
+DROP SCHEMA IF EXISTS gotodolist CASCADE;
